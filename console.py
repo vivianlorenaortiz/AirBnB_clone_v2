@@ -49,14 +49,13 @@ class HBNBCommand(cmd.Cmd):
 
                 if params[1].startswith('"'):
                     param = str(params[1])
-                    param.replace("_"," ")
-                    param.replace('"','\"')
+                    param.replace("_", " ")
+                    param.replace('"', '\"')
                     setattr(obj, params[0], eval(param))
                 elif "." in params[1]:
                     setattr(obj, params[0], float(params[1]))
                 else:
                     setattr(obj, params[0], int(params[1]))
-
 
             obj.save()
             print("{}".format(obj.id))
@@ -133,9 +132,9 @@ class HBNBCommand(cmd.Cmd):
         Exceptions:
             NameError: when there is no object taht has the name
         """
-        objects = storage.all()
         my_list = []
         if not line:
+            objects = storage.all()
             for key in objects:
                 my_list.append(objects[key])
             print(my_list)
@@ -144,11 +143,8 @@ class HBNBCommand(cmd.Cmd):
             args = line.split(" ")
             if args[0] not in self.all_classes:
                 raise NameError()
-            for key in objects:
-                name = key.split('.')
-                if name[0] == args[0]:
-                    my_list.append(objects[key])
-            print(my_list)
+            objects = storage.all(eval(args[0]))
+            print(objects)
         except NameError:
             print("** class doesn't exist **")
 
