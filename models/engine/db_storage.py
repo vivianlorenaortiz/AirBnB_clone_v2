@@ -28,7 +28,6 @@ class DBStorage:
             pool_pre_ping=True)
 
         if os.getenv("HBNB_ENV") == "test":
-            print("removing all tables")
             Base.metadata.drop_all(bind=self.__engine)
         
         session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
@@ -44,7 +43,6 @@ class DBStorage:
     
 
     def new(self, obj):
-        print("executing new")
 
         if obj:
             self.__session.add(obj)
