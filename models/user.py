@@ -16,7 +16,10 @@ class User(BaseModel, Base):
         first_name: first name
         last_name: last name
     """
+<<<<<<< HEAD
 if models.storage_t == 'db':
+=======
+>>>>>>> e5128cea5927c4f37e96faf3490c0939894f8182
     __tablename__ = 'users'
     email = Column(String(128), nullable=False)
     password = Column(String(128), nullable=False)
