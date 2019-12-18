@@ -2,8 +2,6 @@
 """This is the user class"""
 
 from models.base_model import BaseModel, Base
-from models.place import Place
-from models.review import Review
 from sqlalchemy import Column, String
 from sqlalchemy.orm import relationship
 from os import getenv
@@ -22,5 +20,3 @@ class User(BaseModel, Base):
     password = Column(String(128), nullable=False)
     first_name = Column(String(128))
     last_name = Column(String(128))
-    reviews = relationship('Review', backref='user', cascade='delete')
-    places = relationship('Place', backref='user', cascade='delete')
