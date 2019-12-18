@@ -9,6 +9,16 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+import os
 
-storage = FileStorage()
-storage.reload()
+type_storage = os.getenv("HBNB_TYPE_STORAGE")
+storage = None
+if type_storage == "db":
+    from models.engine.db_storage import DBStorage
+    print("DB Storage")
+    storage = DBStorage()
+    storage.reload()
+
+else:
+    storage = FileStorage()
+    storage.reload()
