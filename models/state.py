@@ -16,13 +16,13 @@ class State(BaseModel, Base):
 
     @property
     def cities(self):
-        all_objs_list = {}
-        all_objs = storage.all()
+        all_objs_list = []
+        all_objs = storage.all(City)
 
         for key in all_objs.keys():
 
             id_obj = key.split('.')
 
-            if id_obj[1] == id:
-                all_objs_list[key] = all_objs[key]
+            if id_obj[1] == self.id:
+                all_objs_list.append(all_objs[key])
         return all_objs_list
