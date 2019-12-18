@@ -9,7 +9,7 @@ from sqlalchemy.orm import relationship
 from os import getenv
 
 
-class User(BaseModel):
+class User(BaseModel, Base):
     """This is the class for user
     Attributes:
         email: email address
@@ -17,15 +17,10 @@ class User(BaseModel):
         first_name: first name
         last_name: last name
     """
-    __tablename__ = 'user'
+    __tablename__ = 'users'
     email = Column(String(128), nullable=False)
     password = Column(Strinf(128), nullable=False)
     first_name = Column(String(128))
     last_name = Column(String(128))
     places = relationship("Place", backref="user", cascade="delete")
     reviews = relationship("Review", backref="user", cascade="delete")
-else:
-    email = ""
-    password = ""
-    first_name = ""
-    last_name = ""
