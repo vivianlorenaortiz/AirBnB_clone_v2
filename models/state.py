@@ -12,4 +12,17 @@ class State(BaseModel, Base):
     __tablename__ = 'states'
     name = Column(String(128))
     cities = relationship('City', cascade='all, delete', backref='state')
+    
 
+    @property
+    def cities(self):
+        all_objs_list = {}
+        all_objs = storage.all()
+
+        for key in all_objs.keys():
+
+            id_obj = key.split('.')
+
+            if id_obj[1] == id:
+                all_objs_list[key] = all_objs[key]
+        return all_objs_list
