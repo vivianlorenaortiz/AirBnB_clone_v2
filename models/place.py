@@ -1,10 +1,9 @@
 #!/usr/bin/python3
 """This is the place class"""
-from models.base_model import BaseModel
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String, ForeignKey, Float
 from sqlalchemy.orm import relationship
-
+import models
 class Place(BaseModel, Base):
     """This is the class for Place
     Attributes:
@@ -32,4 +31,5 @@ class Place(BaseModel, Base):
     price_by_night = Column(Integer, default=0, nullable=False)
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
+    reviews = relationship('Review', backref='place', cascade='delete')
 
