@@ -30,14 +30,14 @@ class FileStorage:
             return self.__objects
         else:
             all_objs_list = {}
-            all_objs = self.__objects
-
-            for key in all_objs.keys():
+            if type(cls) is str:
+                    cls = eval(cls)
+            for key in self.__objects.keys():
 
                 class_names = key.split('.')
-
+                
                 if class_names[0] == cls.__name__:
-                    all_objs_list[key] = all_objs[key]
+                    all_objs_list[key] = self.__objects[key]
         return all_objs_list
 
     def new(self, obj):
@@ -72,6 +72,6 @@ class FileStorage:
     def delete(self, obj=None):
         if obj:
             key = "{}.{}".format(type(obj).__name__, obj.id)
-            if key in self.__objects:
+            if key in self.__objects.keys():
                 del self.__objects[key]
                 self.save()
