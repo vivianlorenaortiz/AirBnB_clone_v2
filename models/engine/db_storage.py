@@ -67,6 +67,10 @@ class DBStorage:
             return all_objs
 
         else:
+
+            for obj in self.__session.query(User):
+                key = "{}.{}".format(type(obj).__name__, obj.id)
+                all_objs[key] = obj
             for obj in self.__session.query(State):
                 key = "{}.{}".format(type(obj).__name__, obj.id)
                 all_objs[key] = obj
@@ -75,6 +79,17 @@ class DBStorage:
                 key = "{}.{}".format(type(obj).__name__, obj.id)
                 all_objs[key] = obj
 
+            for obj in self.__session.query(Amenity):
+                key = "{}.{}".format(type(obj).__name__, obj.id)
+                all_objs[key] = obj
+
+            for obj in self.__session.query(Place):
+                key = "{}.{}".format(type(obj).__name__, obj.id)
+                all_objs[key] = obj
+
+            for obj in self.__session.query(Review):
+                key = "{}.{}".format(type(obj).__name__, obj.id)
+                all_objs[key] = obj
 
         return all_objs
             
