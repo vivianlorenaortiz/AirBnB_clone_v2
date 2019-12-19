@@ -49,8 +49,8 @@ class HBNBCommand(cmd.Cmd):
 
                 if params[1].startswith('"'):
                     param = str(params[1])
-                    param.replace("_", " ")
-                    param.replace('"', '\"')
+                    param = param.replace("_", " ")
+                    param = param.replace('"', '\"')
                     setattr(obj, params[0], eval(param))
                 elif "." in params[1]:
                     setattr(obj, params[0], float(params[1]))
