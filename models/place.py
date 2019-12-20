@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This is the place class"""
 from models.base_model import BaseModel, Base
-from sqlalchemy import Column, Integer, String, ForeignKey, Float
+from sqlalchemy import Column, Integer, String, ForeignKey, Float, Table
 from sqlalchemy.orm import relationship
 import models
 class Place(BaseModel, Base):
@@ -19,6 +19,13 @@ class Place(BaseModel, Base):
         longitude: longitude in float
         amenity_ids: list of Amenity ids
     """
+    
+    metadata = Base.metadata
+
+    place_amenity = Table('place_amenity', metadata,
+        Column('place_id', String(60), ForeignKey('places.id')),
+        Column('amenity_id', String(60), ForeignKey('amenities.id'))
+        )
 
     __tablename__ = "places"
     city_id = Column(String(60), ForeignKey('cities.id'), nullable=False)
@@ -32,4 +39,4 @@ class Place(BaseModel, Base):
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
     reviews = relationship('Review', backref='place', cascade='delete')
-
+    amenitys = relationship('Amenity', secondary='place_amenity', viewonly=False)
