@@ -19,10 +19,9 @@ class State(BaseModel, Base):
             all_objs_list = []
             all_objs = storage.all(City)
 
-            for key in all_objs.keys():
+            for city in all_objs.values():
 
-                id_obj = key.split('.')
 
-                if id_obj[1] == self.id:
-                    all_objs_list.append(all_objs[key])
+                if city.state_id == self.id:
+                    all_objs_list.append(city)
             return all_objs_list
