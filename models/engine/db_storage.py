@@ -32,15 +32,15 @@ class DBStorage:
         
         session_factory = sessionmaker(bind=self.__engine, expire_on_commit=False)
 
-        self.__session = scoped_session(session_factory)
-
+        session = scoped_session(session_factory)
+        
+        self.__session = session()
 
 
 
 
     def reload(self):
         Base.metadata.create_all(self.__engine)
-    
 
     def new(self, obj):
 
