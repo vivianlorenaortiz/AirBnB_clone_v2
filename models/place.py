@@ -1,9 +1,12 @@
 #!/usr/bin/python3
-"""This is the place class"""
+"""This is the place class DBStorage-Place"""
+
 from models.base_model import BaseModel, Base
 from sqlalchemy import Column, Integer, String, ForeignKey, Float
 from sqlalchemy.orm import relationship
 import models
+
+
 class Place(BaseModel, Base):
     """This is the class for Place
     Attributes:
@@ -32,4 +35,3 @@ class Place(BaseModel, Base):
     latitude = Column(Float, nullable=True)
     longitude = Column(Float, nullable=True)
     reviews = relationship('Review', backref='place', cascade='delete')
-
