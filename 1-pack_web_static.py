@@ -2,8 +2,8 @@
 """
 Compress before sending
 """
-import time
-from fabric.api import local, run, hosts, env
+from fabric.api import *
+from time import strftime
 
 
 def do_pack():
@@ -15,4 +15,5 @@ def do_pack():
         local("mkdir -p versions")
         local("tar -cvzf versions/{} web_static".format(new_file))
         return ("version/{}".format(new_file))
-    return None
+    except:
+        return None
