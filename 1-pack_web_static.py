@@ -9,8 +9,8 @@ from time import strftime
 def do_pack():
     """
     """
-    datetime = time.strftime("%Y%m%d%H%M%S")
-    new_file = "web_static_" + datatime + ".tgz"
+    datetime = strftime("%Y%m%d%H%M%S")
+    new_file = "web_static_" + datetime + ".tgz"
     try:
         local("mkdir -p versions")
         local("tar -cvzf versions/{} web_static".format(new_file))
