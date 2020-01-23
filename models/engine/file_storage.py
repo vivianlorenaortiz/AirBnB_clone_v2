@@ -78,5 +78,5 @@ class FileStorage:
                 self.save()
 
     def close(self):
-        '''method reload'''
+        '''call reload method'''
         self.reload()
