@@ -19,3 +19,5 @@ def show_state(id=None):
         id = 'State.'+id
     return render_template(
         '9-states.html', states=storage.all("State"), state_id=id)
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=5000)
