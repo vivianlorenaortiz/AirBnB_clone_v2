@@ -31,15 +31,18 @@ class DBStorage:
             .format(os.getenv("HBNB_MYSQL_USER"),
                     os.getenv("HBNB_MYSQL_PWD"),
                     os.getenv("HBNB_MYSQL_DB")),
-            pool_pre_ping=True)
+            pool_pre_ping=True
+            )
 
         if os.getenv("HBNB_ENV") == "test":
             Base.metadata.drop_all(bind=self.__engine)
 
     def reload(self):
         Base.metadata.create_all(self.__engine)
-        session_factory = sessionmaker(bind=self.__engine,
-                                       expire_on_commit=False)
+        session_factory = sessionmaker(
+                                        bind=self.__engine,
+                                        expire_on_commit=False)
+
         self.__session = scoped_session(session_factory)
 
     def new(self, obj):
@@ -72,7 +75,6 @@ class DBStorage:
             for obj in self.__session.query(State):
                 key = "{}.{}".format(type(obj).__name__, obj.id)
                 all_objs[key] = obj
-
             for obj in self.__session.query(City):
                 key = "{}.{}".format(type(obj).__name__, obj.id)
                 all_objs[key] = obj
