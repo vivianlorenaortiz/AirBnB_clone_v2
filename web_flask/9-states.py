@@ -11,13 +11,13 @@ app = Flask(__name__)
 def teardown_session(self):
     storage.close()
 
-
 @app.route('/states')
 @app.route('/states/<id>')
-def show_state(id=None):
+def show_cities_by_state(id=None):
     if id is not None:
         id = 'State.'+id
     return render_template(
         '9-states.html', states=storage.all("State"), state_id=id)
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
