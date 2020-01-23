@@ -15,11 +15,11 @@ def teardown_session(self):
 @app.route('/cities_by_states', strict_slashes=False)
 def cities_list():
     states = storage.all("State").values()
-    city = []
+    c_state = []
     sorted_arr = []
     for state in sorted(states, key=lambda k: k.name):
         city.append([state, state.cities])
-    return render_template('7-states_list.html', city=city)
+    return render_template('8-cities_by_states.html', c_state=c_state)
 
 
 if __name__ == '__main__':
