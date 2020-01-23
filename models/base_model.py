@@ -7,8 +7,6 @@ from sqlalchemy import Column, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
-
-
 class BaseModel:
     """This class will defines all common attributes/methods
     for other classes
@@ -16,6 +14,7 @@ class BaseModel:
     id = Column(String(60), primary_key=True)
     created_at = Column(DateTime, default=datetime.utcnow())
     updated_at = Column(DateTime, default=datetime.utcnow())
+
 
     def __init__(self, *args, **kwargs):
         """Instantiation of base model class
@@ -36,6 +35,7 @@ class BaseModel:
 
         self.id = str(uuid.uuid4())
         self.created_at = self.updated_at = datetime.now()
+
 
     def __str__(self):
         """returns a string
@@ -64,6 +64,7 @@ class BaseModel:
             returns a dictionary of all the key values in __dict__
         """
 
+
         my_dict = dict(self.__dict__)
 
         my_dict["__class__"] = str(type(self).__name__)
@@ -74,6 +75,5 @@ class BaseModel:
             del my_dict['_sa_instance_state']
 
         return my_dict
-
     def delete(self):
         model.storage.delete(self)
