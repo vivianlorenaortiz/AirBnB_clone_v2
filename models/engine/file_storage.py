@@ -35,7 +35,7 @@ class FileStorage:
             for key in self.__objects.keys():
 
                 class_names = key.split('.')
-                
+
                 if class_names[0] == cls.__name__:
                     all_objs_list[key] = self.__objects[key]
         return all_objs_list
@@ -76,3 +76,7 @@ class FileStorage:
             if key in self.__objects.keys():
                 del self.__objects[key]
                 self.save()
+
+    def close(self):
+        '''method reload'''
+        self.reload()
