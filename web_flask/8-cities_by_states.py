@@ -12,13 +12,10 @@ def teardown_session(self):
     storage.close()
 
 
-@app.route('/cities_by_states', strict_slashes=False)
-def cities_by_state():
-    states = storage.all("State").values()
-    ci_sta = []
-    for state in sorted(states, key=lambda k: k.name):
-        ci_sta.append([state, state.cities])
-    return render_template('8-cities_by_states.html', ci_sta = ci_sta)
+@app.route('/cities_by_states')
+def show_cities_by_state():
+    return render_template(
+        '8-cities_by_states.html', states=storage.all("State").values())
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
