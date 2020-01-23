@@ -20,6 +20,11 @@ class DBStorage:
     __engine = None
     __session = None
 
+    __dict_cls = {
+                "State": State,
+                "City": City
+                }
+
     def __init__(self):
         self.__engine = create_engine(
             'mysql+mysqldb://{}:{}@localhost/{}'
@@ -54,7 +59,7 @@ class DBStorage:
         all_objs = {}
 
         if cls:
-             for obj in self.__session.query(self.__dict_cls[cls]):
+            for obj in self.__session.query(self.__dict_cls[cls]):
                 key = "{}.{}".format(type(obj).__name__, obj.id)
                 all_objs[key] = obj
             return all_objs
