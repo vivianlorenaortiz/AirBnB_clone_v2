@@ -13,9 +13,8 @@ class State(BaseModel, Base):
     """
     __tablename__ = 'states'
     name = Column(String(128))
+    cities = relationship('City', cascade='all, delete', backref='state')
     if os.getenv('HBNB_TYPE_STORAGE') == 'db':
-        cities = relationship('City', cascade='all, delete', backref='state')
-    else:
         @property
         def cities(self):
             all_objs_list = []
