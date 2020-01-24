@@ -6,6 +6,7 @@ from sqlalchemy.orm import relationship, backref
 from os import environ
 import models
 
+
 class State(BaseModel, Base):
     """This is the class for State
     Attributes:
@@ -26,4 +27,3 @@ class State(BaseModel, Base):
                 if value.state_id == self.id
             ]
             return cities
-
